@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 0 auto;
+  border-radius: var(--large-border-radius);
+  box-shadow: 0 0 24px 7px rgba(0, 0, 0, 0.2);
+  color: var(--primary-text-color);
+  background: var(--card-color);
+  padding: 15px;
+  min-height: 350px;
+  max-width: 50%;
+}

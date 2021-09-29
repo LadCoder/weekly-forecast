@@ -1,0 +1,6 @@
+.heading {
+  display: flex;
+  justify-self: center;
+  color: var(--primary-color);
+  margin: 25px 10px;
+}
