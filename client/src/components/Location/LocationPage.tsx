@@ -1,10 +1,10 @@
 import React from 'react'
 import { Alert } from 'react-bootstrap'
 import { useGetForecast } from '../../hooks/useGetForecast'
-import Header from '../Header/Header'
+import { ForecastComponent } from '../Forecast/ForecastComponent'
 import { Loader } from '../shared/Loader'
-import { LocationForm } from './LocationForm'
 import styles from './LocationPage.module.css'
+import { NavbarComponent } from '../shared/NavbarComponent'
 
 /**
  * Allows the user to search for the weather forecast of a given location.
@@ -12,20 +12,21 @@ import styles from './LocationPage.module.css'
  */
 export function LocationPage(): JSX.Element {
   const { error, isLoading, forecast, searchLocation } = useGetForecast()
-  console.log(forecast)
+
   return (
-    <div className={styles.wrapper}>
-      <Header title="Weekly Forecast" />
-      <div className={styles.data}>
-        {!isLoading && <LocationForm onSearch={searchLocation} />}
+    <>
+      <NavbarComponent onSearch={searchLocation} />
+      <div className={styles.wrapper}>
         {isLoading && <Loader />}
-        {/* Forecast */}
+        {!isLoading && forecast && (
+          <ForecastComponent weeklyForecast={forecast} />
+        )}
+        {error && (
+          <Alert title={error.name} variant="danger">
+            {error.message}
+          </Alert>
+        )}
       </div>
-      {error && (
-        <Alert title={error.name} variant="danger">
-          {error.message}
-        </Alert>
-      )}
-    </div>
+    </>
   )
 }

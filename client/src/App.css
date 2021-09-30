@@ -5,12 +5,11 @@
 }
 
 :root {
-  --bg-color: #313131;
+  --bg-color: #212121;
   --card-color: #181818;
   --primary-text-color: #fff;
-  --secondary-text-color: #ddd;
-  --large-border-radius: 25px;
-  --small-border-radius: 15px;
+  --secondary-text-color: #aaa;
+  --shadow: 0 0 10px 5px rgb(0, 0, 0, 0.5);
 }
 
 body {

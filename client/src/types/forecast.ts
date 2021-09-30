@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 export interface Forecast {
-  day: Date
+  id: string
+  date: Date
   minTemp: number
   maxTemp: number
   weatherState: string

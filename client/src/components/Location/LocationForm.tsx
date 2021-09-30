@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
-import styles from './LocationForm.module.css'
+import { Button, Form, FormControl } from 'react-bootstrap'
+// import styles from './LocationForm.module.css'
 
 interface Props {
   onSearch: (location: string) => void
@@ -20,18 +20,16 @@ export function LocationForm({ onSearch }: Props): JSX.Element {
   }
 
   return (
-    <Form className={styles.form} onSubmit={onSubmit}>
-      <Form.Control
-        as="input"
-        type="text"
-        placeholder="Location"
-        aria-label="location"
-        required
-        value={location}
+    <Form className={'d-flex'} onSubmit={onSubmit}>
+      <FormControl
+        type="search"
+        placeholder="Search"
+        className="mr-2"
+        aria-label="location search"
         onChange={(e) => setLocation(e.target.value)}
       />
-      <Button className={styles.button} type="submit">
-        Submit
+      <Button type="submit" variant="success">
+        Search
       </Button>
     </Form>
   )

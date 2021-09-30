@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { Forecast, WeeklyForecast } from '../types/forecast'
-import { requestUrl } from '../config/paths'
+import { requestUrl } from '../types/paths'
 
 interface ForecastResult {
   error?: Error
   isLoading: boolean
-  forecast?: unknown
+  forecast?: WeeklyForecast
   searchLocation(location: string): void
 }
 
@@ -15,13 +15,15 @@ interface ForecastResult {
  * @return {ForecastResult}
  */
 export function useGetForecast(): ForecastResult {
-  const [error, setError] = useState<Error | undefined>()
+  const [error, setError] = useState<Error | undefined>(undefined)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [forecast, setForecast] = useState<WeeklyForecast | undefined>()
+  const [forecast, setForecast] = useState<WeeklyForecast | undefined>(
+    undefined
+  )
 
   const getWoeid = async (location: string) => {
     const { data } = await axios(`${requestUrl}search/`, {
-      params: { query: location },
+      params: { query: location }
     })
 
     if (!data || data.length === 0) {
@@ -43,9 +45,11 @@ export function useGetForecast(): ForecastResult {
     const forecasts: Forecast[] = data.consolidated_weather.map(
       (forecast: any) => {
         return {
+          id: forecast.id,
           date: forecast.applicable_date,
-          minTemp: forecast.min_temp,
-          maxTemp: forecast.max_temp
+          minTemp: Math.round(forecast.min_temp),
+          maxTemp: Math.round(forecast.max_temp),
+          weatherState: forecast.weather_state_abbr
         }
       }
     )
@@ -59,11 +63,16 @@ export function useGetForecast(): ForecastResult {
   }
 
   const searchLocation = async (location: string) => {
+    setForecast(undefined)
     setIsLoading(true)
     setError(undefined)
     try {
       const woeid = await getWoeid(location)
       const forecastData = await getForecastData(woeid)
+
+      if (!forecastData) {
+        throw new Error('Could not retrieve forecast data')
+      }
 
       setForecast(forecastData)
     } catch (error) {
@@ -71,5 +80,6 @@ export function useGetForecast(): ForecastResult {
     }
     setIsLoading(false)
   }
+
   return { error, isLoading, forecast, searchLocation }
 }
