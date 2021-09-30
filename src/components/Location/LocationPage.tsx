@@ -1,5 +1,8 @@
 import React from 'react'
+import { Alert } from 'react-bootstrap'
+import { useGetForecast } from '../../hooks/useGetForecast'
 import Header from '../Header/Header'
+import { Loader } from '../shared/Loader'
 import { LocationForm } from './LocationForm'
 import styles from './LocationPage.module.css'
 
@@ -8,16 +11,21 @@ import styles from './LocationPage.module.css'
  * @return {JSX.Element} The form
  */
 export function LocationPage(): JSX.Element {
-  const onSearch = () => {}
+  const { error, isLoading, forecast, searchLocation } = useGetForecast()
+  console.log(forecast)
   return (
     <div className={styles.wrapper}>
       <Header title="Weekly Forecast" />
       <div className={styles.data}>
-        <LocationForm onSearch={onSearch} />
-        {/* Error */}
-        {/* Loader */}
+        {!isLoading && <LocationForm onSearch={searchLocation} />}
+        {isLoading && <Loader />}
         {/* Forecast */}
       </div>
+      {error && (
+        <Alert title={error.name} variant="danger">
+          {error.message}
+        </Alert>
+      )}
     </div>
   )
 }
