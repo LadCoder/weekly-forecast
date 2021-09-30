@@ -1,11 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { Forecast, WeeklyForecast } from '../types/forecast'
-
-const baseUrl = 'http://www.metaweather.com/api/location'
-const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
-
-const requestUrl = `${proxyUrl}${baseUrl}`
+import { requestUrl } from '../config/paths'
 
 interface ForecastResult {
   error?: Error
@@ -24,8 +20,8 @@ export function useGetForecast(): ForecastResult {
   const [forecast, setForecast] = useState<WeeklyForecast | undefined>()
 
   const getWoeid = async (location: string) => {
-    const { data } = await axios(`${requestUrl}/search`, {
-      params: { query: location }
+    const { data } = await axios(`${requestUrl}search/`, {
+      params: { query: location },
     })
 
     if (!data || data.length === 0) {
