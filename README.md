@@ -20,3 +20,7 @@ You can also use `npm run setup:client` or `npm run setup:server` to install the
 ### `npm run dev`
 
 Launches the proxy and the client concurrently on ports 3000 and 4000.
+
+### `npm run test:client`
+
+Launches the test suite for the client. View the client readme for more information.

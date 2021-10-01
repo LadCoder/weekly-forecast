@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Form, FormControl } from 'react-bootstrap'
-// import styles from './LocationForm.module.css'
 
 interface Props {
-  onSearch: (location: string) => void
+  onSearch(location: string): void
 }
 
 /**
@@ -13,7 +12,7 @@ interface Props {
 export function LocationForm({ onSearch }: Props): JSX.Element {
   const [location, setLocation] = useState<string>('')
 
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!location || location === '') return
     onSearch(location)
@@ -26,9 +25,9 @@ export function LocationForm({ onSearch }: Props): JSX.Element {
         placeholder="Search"
         className="mr-2"
         aria-label="location search"
-        onChange={(e) => setLocation(e.target.value)}
+        onChange={(e: any) => setLocation(e.target.value)}
       />
-      <Button type="submit" variant="success">
+      <Button data-testid="search-button" type="submit" variant="success">
         Search
       </Button>
     </Form>

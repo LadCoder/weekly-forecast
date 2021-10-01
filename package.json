@@ -9,7 +9,8 @@
     "dev": "concurrently \"npm run client\" \"npm run server\"",
     "setup:client": "cd client && npm i",
     "setup:server": "cd cors-anywhere && npm i",
-    "setup": "concurrently \"npm run setup:client\" \"npm run setup:server\""
+    "setup": "concurrently \"npm run setup:client\" \"npm run setup:server\"",
+    "test:client": "cd client && npm run test"
   },
   "repository": {
     "type": "git",
