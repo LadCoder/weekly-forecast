@@ -10,8 +10,8 @@ interface Props {
 }
 
 /**
- * Allows the user to search for the weather forecast of a given location.
- * @return {JSX.Element} The form
+ * Navigation that sits at the top of the page
+ * @return {JSX.Element} A navbar containing branding and the location form
  */
 export function NavbarComponent({ onSearch }: Props): JSX.Element {
   const { width } = useWindowSize()

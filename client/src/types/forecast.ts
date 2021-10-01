@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export interface Forecast {
   id: string
   date: Date

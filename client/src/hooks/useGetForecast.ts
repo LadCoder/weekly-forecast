@@ -11,7 +11,7 @@ interface ForecastResult {
 }
 
 /**
- * Get the WOEID for a given location and then return a forecast
+ * Get the WOEID for a given location and then return the weekly forecast
  * @return {ForecastResult}
  */
 export function useGetForecast(): ForecastResult {

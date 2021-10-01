@@ -10,7 +10,7 @@ import { LocationForm } from './LocationForm'
 
 /**
  * Allows the user to search for the weather forecast of a given location.
- * @return {JSX.Element} The form
+ * @return {JSX.Element} The page containing a search form, and forecast data
  */
 export function LocationPage(): JSX.Element {
   const { error, isLoading, forecast, searchLocation } = useGetForecast()
