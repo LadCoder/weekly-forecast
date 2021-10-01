@@ -16,13 +16,11 @@ interface Props {
 export function ForecastComponent({ weeklyForecast }: Props): JSX.Element {
   return (
     <Container className={styles.container}>
+      <h3>{weeklyForecast.title}</h3>
       <Row>
         {weeklyForecast.forecasts.map((forecast) => {
           return (
-            <Col
-              key={forecast.id}
-              className="col-lg-2 col-md-2 col-sm-2 col-xs-4"
-            >
+            <Col key={forecast.id} className={styles.col}>
               <Day forecast={forecast} />
             </Col>
           )

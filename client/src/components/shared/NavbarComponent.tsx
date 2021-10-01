@@ -3,6 +3,7 @@ import styles from './NavbarComponent.module.css'
 import logo from '../../assets/logo.svg'
 import { Navbar } from 'react-bootstrap'
 import { LocationForm } from '../Location/LocationForm'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 interface Props {
   onSearch: (location: string) => void
@@ -13,6 +14,8 @@ interface Props {
  * @return {JSX.Element} The form
  */
 export function NavbarComponent({ onSearch }: Props): JSX.Element {
+  const { width } = useWindowSize()
+
   return (
     <Navbar className={styles.nav} variant="dark">
       <Navbar.Brand className={styles.brand} href="/">
@@ -25,7 +28,7 @@ export function NavbarComponent({ onSearch }: Props): JSX.Element {
         />
         Weekly Forecast Tracker
       </Navbar.Brand>
-      <LocationForm onSearch={onSearch} />
+      {width >= 768 && <LocationForm onSearch={onSearch} />}
     </Navbar>
   )
 }

@@ -42,17 +42,18 @@ export function useGetForecast(): ForecastResult {
       throw new Error('Could not retrieve forecast data')
     }
 
-    const forecasts: Forecast[] = data.consolidated_weather.map(
-      (forecast: any) => {
-        return {
-          id: forecast.id,
-          date: forecast.applicable_date,
-          minTemp: Math.round(forecast.min_temp),
-          maxTemp: Math.round(forecast.max_temp),
-          weatherState: forecast.weather_state_abbr
-        }
+    // Cut the forecast to a 5 day week
+    const forecastData = data.consolidated_weather.slice(0, -1) || []
+
+    const forecasts: Forecast[] = forecastData.map((forecast: any) => {
+      return {
+        id: forecast.id,
+        date: forecast.applicable_date,
+        minTemp: Math.round(forecast.min_temp),
+        maxTemp: Math.round(forecast.max_temp),
+        weatherState: forecast.weather_state_abbr
       }
-    )
+    })
 
     const weeklyForecast: WeeklyForecast = {
       woeid: data.woeid,

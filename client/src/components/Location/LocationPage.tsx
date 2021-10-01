@@ -5,6 +5,8 @@ import { ForecastComponent } from '../Forecast/ForecastComponent'
 import { Loader } from '../shared/Loader'
 import styles from './LocationPage.module.css'
 import { NavbarComponent } from '../shared/NavbarComponent'
+import { useWindowSize } from '../../hooks/useWindowSize'
+import { LocationForm } from './LocationForm'
 
 /**
  * Allows the user to search for the weather forecast of a given location.
@@ -12,11 +14,13 @@ import { NavbarComponent } from '../shared/NavbarComponent'
  */
 export function LocationPage(): JSX.Element {
   const { error, isLoading, forecast, searchLocation } = useGetForecast()
+  const { width } = useWindowSize()
 
   return (
-    <>
+    <div className={styles.page}>
       <NavbarComponent onSearch={searchLocation} />
-      <div className={styles.wrapper}>
+      {width < 768 && <LocationForm onSearch={searchLocation} />}
+      <div className={styles.content}>
         {isLoading && <Loader />}
         {!isLoading && forecast && (
           <ForecastComponent weeklyForecast={forecast} />
@@ -27,6 +31,6 @@ export function LocationPage(): JSX.Element {
           </Alert>
         )}
       </div>
-    </>
+    </div>
   )
 }

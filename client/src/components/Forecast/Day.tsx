@@ -1,9 +1,9 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
 import { weatherImageUrl } from '../../types/paths'
 import { getDayOfTheWeek } from '../../helpers/getDayOfTheWeek'
 import { Forecast } from '../../types/forecast'
 import styles from './Day.module.css'
+import { CardComponent } from '../shared/CardComponent'
 
 interface Props {
   forecast: Forecast
@@ -16,7 +16,7 @@ interface Props {
  */
 export function Day({ forecast }: Props): JSX.Element {
   return (
-    <Card className={styles.wrapper}>
+    <CardComponent>
       <img width="50" src={weatherImageUrl(forecast.weatherState)} alt="" />
       <span className={styles.title}>{getDayOfTheWeek(forecast.date)}</span>
       <span>
@@ -27,6 +27,6 @@ export function Day({ forecast }: Props): JSX.Element {
         <span className={styles.title}>Min: </span>
         {forecast.minTemp}&deg;
       </span>
-    </Card>
+    </CardComponent>
   )
 }

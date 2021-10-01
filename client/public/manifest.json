@@ -1,6 +1,6 @@
 {
-  "short_name": "Crypto Tracker",
-  "name": "Cryptocurrency Tracker",
+  "short_name": "Weekly Forecast",
+  "name": "Weekly Forecast Tracker",
   "icons": [
     {
       "src": "favicon.ico",
