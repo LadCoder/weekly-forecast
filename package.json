@@ -6,7 +6,10 @@
   "scripts": {
     "client": "cd client && npm run start",
     "server": "cd cors-anywhere && node server",
-    "dev": "concurrently \"npm run client\" \"npm run server\""
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "setup:client": "cd client && npm i",
+    "setup:server": "cd cors-anywhere && npm i",
+    "setup": "concurrently \"npm run setup:client\" \"npm run setup:server\""
   },
   "repository": {
     "type": "git",
